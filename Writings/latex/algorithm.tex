@@ -1,0 +1,189 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+
+\title{Location Prediction Algorithm}
+\author{Shashank Sharma }
+\date{August 2018}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+This algorithm is designed to predict human locations in a real world scenario. The GPS data is taken as input and the processed using the below algorithm.
+
+
+The Algorithm has several steps:
+\begin{itemize}
+\item Detect stay-points (also detect start or end of the trajectory)
+\item Group stay-points to form states
+\item Calculate hourly weights for the states
+\item Apply Markov chain for the data available
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.46]{Flowchart_Algo.png}
+\caption{Algorithm Flow-chart}
+\label{fig:flow-chart}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.34]{hourlymat.png}
+\caption{Algorithm Flow-chart}
+\label{fig:flow-chart}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.35]{markovchain.png}
+\caption{Algorithm Flow-chart}
+\label{fig:flow-chart}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.35]{stateweights.png}
+\caption{Algorithm Flow-chart}
+\label{fig:flow-chart}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.54]{threestepsover.png}
+\caption{Algorithm Flow-chart}
+\label{fig:flow-chart}
+\end{figure}
+
+\section{Definitions}
+\begin{itemize}
+	\item \textbf{Stay-points:} Stay-points are any points which are stayed by the user in user trajectories or it is the start or the end of the trajectory. For example, if user start at his home, the home itself is a stay-point. Now he move towards work, but he visit a cafe in between for breakfast. The cafe is also a stay-point and then he finishes his trajectory at work, where work is again a stay-point. The places like cafe in this case is identified using distance and time based clustering. For example, a set of points within 200m with total duration of stay greater than 20 minutes can be regarded as a stay-point within the trajectory.
+	\item \textbf{State:} A state is formed using a group of stay-points. This is done using a distance threshold for states. All the stay-points within this threshold distance are grouped together as a single state. This is called snapping stay-points to the states. The mean of all location latitudes and longitudes from stay-points within a state are stored per state. Finally Markov Chain model is applied to the states. \textit{Note: A new stay-point is only added to the state if after calculating the mean of the new state, all the existing stay-points still stay within the distance threshold from this mean. This is done to avoid drifting problem while aggregating the stay-points into states.}
+\end{itemize}
+
+\section{Algorithms}
+
+\begin{algorithm}
+\caption{Read new location and process}
+\label{pseudoPSO}
+\begin{algorithmic}[1]
+\State Read new latitude, new longitude, new datetime information and process these new points
+\While{$New Location Detected == True$}
+\State Set $newHour = datetime.hour $
+\State Set $newDate = datetime.date $
+\If{$newHour != prevHour$}
+	\State $prevHour \gets newHour$
+	\State calculateLastHourStayPoints()
+	\State formStates()
+	\State calculateStateLastHourWeights()
+\EndIf
+    
+\If{$newDate != prevDate$}
+	\State $prevDate \gets newDate$
+	\State recalculateMarkovModel()
+\EndIf
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{calculateLastHourStayPoints() : Calculate last hour stay-points}
+\label{pseudoPSO}
+\begin{algorithmic}[1]
+\State Calculate stay-points
+\State \textit{trackingThreshold:} Maximum time distance between two points
+\State \textit{thresholdDistance:} Stay-point threshold distance covered
+\State \textit{thresholdTime:} Stay-point threshold time spent
+\For{$each Last Hour Point$ }
+
+\If{$(point(i).datetime - point(i-1).datetime)>=trackingThreshold$}
+	\State Add point(i), point(i-1) as stay-points
+	\State recalculateStartEndStaypoint()
+\EndIf    
+
+\If{$distance(point(i), cluster) <= thresholdDistance$}
+	\State add point i to cluster
+	\State calculate Cluster Means
+\Else
+	\If{$(cluster != empty$) And $duration(cluster) >= thresholdTime$}
+    	\State Add this cluster to stay-points
+    	\State recalculateStartEndStaypoint()
+	\EndIf
+\EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{recalculateStartEndStaypoint() : Calculte start-end of staypoints}
+\label{pseudoPSO}
+\begin{algorithmic}[1]
+\For{$each Staypoint$ }
+	\State Set $distance \gets distance(staypoint(i), staypoint(i+1)$
+	\State Set $time \gets timeDifference(staypoint(i), staypoint(i+1)$
+	\State Set $AvgSpeed \gets distance/time$
+	\State Set $AddTime \gets min(distance$, $thresholdDistance)/AvgSpeed$
+	\State Set $endTimeofStaypoint(i) \gets endTimeStaypoint(i) + AddTime$
+	\State Set $startTimeofStaypoint(i+1) \gets startTimeStaypoin(i+1)-AddTime$
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}
+\caption{formStates() : Form states from stay-points}
+\label{pseudoPSO}
+\begin{algorithmic}[1]
+
+\State Form each unique stay-point as individual state
+\State Now, within this loop, start combining the states
+\State \textit{thresholdState:} State distance threshold
+\For{$each State$ }
+
+\If{$distance(state(i), state(i+1)) <= thresholdDistance$}
+	\State calculate new state mean latitude, mean longitude
+	\If{$distance(all Exiting State (i) Staypoints, New Mean Lat Long) <= thresholdState$}
+	\State combine state i, i+1
+	\State calculate State Means
+	\EndIf
+\EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{calculateStateLastHourWeights() : Calculate Hourly Weights of States}
+\label{pseudoPSO}
+\begin{algorithmic}[1]
+\State This creates a weights of all states from 0 Hrs to 24 Hrs for each date
+\For{$each State$ }
+
+\If{($Hour Changes$) Or ($StateID Changes$}
+	\State Calculate the start and end of the state i
+\EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}
+\caption{recalculateMarkovModel() : Recalculate the Markov Model}
+\label{pseudoPSO}
+\begin{algorithmic}[1]
+\State This algorithm creates the transition probabilities from state i to i+1 from hour h to h+1
+\For{each $Hth-hour$ from $0-24$ }
+	\For{each $ith-state$ in $state-hourly-weight$ }
+    	\State $state(i)->state(i+1)$ transition for $H-hour$ = $Matrix[state]$ * $Matrix[State+1]$
+	\EndFor
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}
+
+
+

@@ -1,0 +1,12 @@
+Install PIP in Windows:
+
+1. curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+2. py get-pip.py
+3. set PATH=%PATH%;C:\Users\12sha\Anaconda3\Scripts
+4. Install anything using PIP:
+	e.g.: pip install geopy
+
+to check location
+import os
+import sys
+os.path.dirname(sys.executable)
