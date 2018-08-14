@@ -3,6 +3,7 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsthm, ,amsfonts}
 
 \title{Location Prediction Algorithm}
 \author{Shashank Sharma }
@@ -71,22 +72,20 @@ The Algorithm has several steps:
 \caption{Read new location and process}
 \label{pseudoPSO}
 \begin{algorithmic}[1]
-\State Read new latitude, new longitude, new datetime information and process these new points
-\While{$New Location Detected == True$}
-\State Set $newHour = datetime.hour $
-\State Set $newDate = datetime.date $
+\For{each newpoint[x, y, d]}
+\State $newHour \gets d_h$
+\State $newDate \gets d_d$
 \If{$newHour != prevHour$}
 	\State $prevHour \gets newHour$
 	\State calculateLastHourStayPoints()
 	\State formStates()
 	\State calculateStateLastHourWeights()
+	\If{$newDate != prevDate$}
+		\State $prevDate \gets newDate$
+		\State recalculateMarkovModel()
+	\EndIf
 \EndIf
-    
-\If{$newDate != prevDate$}
-	\State $prevDate \gets newDate$
-	\State recalculateMarkovModel()
-\EndIf
-\EndWhile
+\EndFor
 \end{algorithmic}
 \end{algorithm}
 
@@ -94,26 +93,23 @@ The Algorithm has several steps:
 \caption{calculateLastHourStayPoints() : Calculate last hour stay-points}
 \label{pseudoPSO}
 \begin{algorithmic}[1]
-\State Calculate stay-points
-\State \textit{trackingThreshold:} Maximum time distance between two points
-\State \textit{thresholdDistance:} Stay-point threshold distance covered
-\State \textit{thresholdTime:} Stay-point threshold time spent
-\For{$each Last Hour Point$ }
 
-\If{$(point(i).datetime - point(i-1).datetime)>=trackingThreshold$}
-	\State Add point(i), point(i-1) as stay-points
+\For{each  lst\_hr\_pts[x, y, d]}
+\If{$d(i) - d(i-1) > th\_tck$}
+	\State$ sp \gets lst\_hr\_pts(i),  lst\_hr\_pts(i-1)$
 	\State recalculateStartEndStaypoint()
-\EndIf    
+\EndIf
 
-\If{$distance(point(i), cluster) <= thresholdDistance$}
-	\State add point i to cluster
+\If{$distance( lst\_hr\_pts(i), cluster) <=   th\_d$}
+	\State $cluster \gets add lst\_hr\_pts(i)$ 
 	\State calculate Cluster Means
 \Else
-	\If{$(cluster != empty$) And $duration(cluster) >= thresholdTime$}
-    	\State Add this cluster to stay-points
+	\If{$(cluster != empty$) And $duration(cluster) >= th\_t$}
+    	\State $sp \gets cluster$
     	\State recalculateStartEndStaypoint()
 	\EndIf
 \EndIf
+
 \EndFor
 \end{algorithmic}
 \end{algorithm}
@@ -122,13 +118,13 @@ The Algorithm has several steps:
 \caption{recalculateStartEndStaypoint() : Calculte start-end of staypoints}
 \label{pseudoPSO}
 \begin{algorithmic}[1]
-\For{$each Staypoint$ }
-	\State Set $distance \gets distance(staypoint(i), staypoint(i+1)$
-	\State Set $time \gets timeDifference(staypoint(i), staypoint(i+1)$
-	\State Set $AvgSpeed \gets distance/time$
-	\State Set $AddTime \gets min(distance$, $thresholdDistance)/AvgSpeed$
-	\State Set $endTimeofStaypoint(i) \gets endTimeStaypoint(i) + AddTime$
-	\State Set $startTimeofStaypoint(i+1) \gets startTimeStaypoin(i+1)-AddTime$
+\For{each sp}
+	\State $distance \gets distance(sp(i), sp(i+1)$
+	\State $time \gets timeDifference(sp(i), sp(i+1)$
+	\State $AvgSpeed \gets distance/time$
+	\State $AddTime \gets min(distance$, $thresholdDistance)/AvgSpeed$
+	\State Update endTime for sp(i)
+	\State Update startTime for sp(i+1)
 \EndFor
 \end{algorithmic}
 \end{algorithm}
@@ -139,16 +135,12 @@ The Algorithm has several steps:
 \label{pseudoPSO}
 \begin{algorithmic}[1]
 
-\State Form each unique stay-point as individual state
-\State Now, within this loop, start combining the states
-\State \textit{thresholdState:} State distance threshold
-\For{$each State$ }
-
-\If{$distance(state(i), state(i+1)) <= thresholdDistance$}
+\For{each st }
+\If{$distance(st(i), st(i+1)) <= th\_d$}
 	\State calculate new state mean latitude, mean longitude
-	\If{$distance(all Exiting State (i) Staypoints, New Mean Lat Long) <= thresholdState$}
-	\State combine state i, i+1
-	\State calculate State Means
+	\If{distance(All (orig lat, orig lon) forming st(i) , st(i+1)) $<=$ th\_d}
+	\State combine st(i), st(i+1)
+	\State calculate combined st Means
 	\EndIf
 \EndIf
 \EndFor
@@ -160,10 +152,10 @@ The Algorithm has several steps:
 \label{pseudoPSO}
 \begin{algorithmic}[1]
 \State This creates a weights of all states from 0 Hrs to 24 Hrs for each date
-\For{$each State$ }
+\For{each st }
 
-\If{($Hour Changes$) Or ($StateID Changes$}
-	\State Calculate the start and end of the state i
+\If{($Hour Changes$) Or ($StateID Changes$)}
+	\State $st\_hr\_wt \gets st(i), startTime, endTime$
 \EndIf
 \EndFor
 \end{algorithmic}
@@ -171,13 +163,13 @@ The Algorithm has several steps:
 
 
 \begin{algorithm}
-\caption{recalculateMarkovModel() : Recalculate the Markov Model}
+\caption{recalculateMarkovModel() : Recalculate the Markov Model(This algorithm creates the transition probabilities from state i to i+1 from hour j to j+1)}
 \label{pseudoPSO}
 \begin{algorithmic}[1]
-\State This algorithm creates the transition probabilities from state i to i+1 from hour h to h+1
-\For{each $Hth-hour$ from $0-24$ }
-	\For{each $ith-state$ in $state-hourly-weight$ }
-    	\State $state(i)->state(i+1)$ transition for $H-hour$ = $Matrix[state]$ * $Matrix[State+1]$
+\State 
+\For{each $jth-Hour$ from $0to24$ }
+	\For{each ith-st}
+	\State $mc \gets st\_hr\_wt[i][j] * st\_hr\_wt[i+1][j]$
 	\EndFor
 \EndFor
 \end{algorithmic}
