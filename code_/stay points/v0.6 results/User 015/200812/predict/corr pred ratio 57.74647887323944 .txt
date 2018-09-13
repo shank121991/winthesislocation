@@ -1,0 +1,12 @@
+Total Predictions: 71
+Correct Predictions: 41
+Incorrect Predictions: 1
+Accuracy%: 57.74647887323944
+True Positives: 42
+False Positives: 29
+False Negatives: 0
+True Negatives: 0
+True positive rate(Recall)%: 100.0
+Accuracy Positives%: 59.154929577464785
+Positive predictive value(Precision)%: 59.154929577464785
+False discovery rate%: 40.845070422535215
