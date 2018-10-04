@@ -1,0 +1,100 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6730 64-bit) (preloaded format=pdflatex 2018.8.12)  4 OCT 2018 09:46
+entering extended mode
+**"./online template.tex"
+("online template.tex"
+LaTeX2e <2018-04-01> patch level 5
+
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvoptions
+-patch.sty"
+Package: kvoptions-patch 2016/05/16 v3.12 LaTeX patch for keyval options (HO)
+
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\etexcmd
+s.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\infware
+rr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifluate
+x.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+))
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\latex\nag\nag.sty"
+Package: nag 2011/11/25 0.7 warning about old commands (ulmi)
+\c@nag@c=\count80
+\c@nag@sins=\count81
+Package nag Info: Loaded nag-l2tabu.cfg  on input line 552.
+
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\latex\nag\nag-l2tabu.cfg
+"
+File: nag-l2tabu.cfg 2010/05/17 v2.11 l2tabu rules for nag.sty (ulmi)
+)
+Package nag Info: Loaded nag-orthodox.cfg  on input line 552.
+
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\latex\nag\nag-orthodox.c
+fg"
+File: nag-orthodox.cfg 2006/04/19 v1.8 strict rules for nag.sty (ulmi)
+))
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hyphsub
+st.sty"
+Package: hyphsubst 2016/05/16 v0.3 Substitute hyphenation patterns (HO)
+Package hyphsubst Info: Redefined: \l@ngerman
+(hyphsubst)             old value: 45
+(hyphsubst)             new value: 46 on input line 223.
+)
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrboo
+k.cls"
+Document Class: scrbook 2018/03/30 v3.25 KOMA-Script document class (book)
+
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrkba
+se.sty"
+Package: scrkbase 2018/03/30 v3.25 KOMA-Script package (KOMA-Script-dependent b
+asics and keyval usage)
+
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrbas
+e.sty"
+Package: scrbase 2018/03/30 v3.25 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
+
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval.st
+y"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrlfi
+le.sty"
+Package: scrlfile 2018/03/30 v3.25 KOMA-Script package (loading files)
+)))
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\tocbas
+ic.sty"
+Package: tocbasic 2018/03/30 v3.25 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip41
+\scr@dte@tocline@numbox=\box26
+)
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 136.
+Package tocbasic Info: defining new hook before heading of `' on input line 166
+3.
+Class scrbook Info: You've used standard option `final'.
+(scrbook)           This is correct!
+(scrbook)           Internally I'm using `draft=false'.
+(scrbook)           If you'd like to set the option with \KOMAoptions,
+(scrbook)           you'd have to use `draft=false' there
+(scrbook)           instead of `final', too.
+Class scrbook Info: File `scrsize12pt.clo' used to setup font sizes on input li
+ne 2331.
+
+("C:\Users\12sha\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrsiz
+e12pt.clo"
+File: scrsize12pt.clo 2018/03/30 v3.25 KOMA-Script font size class option (12pt
+)
+)
+("C:\Users\12sha\AppData\Loc
