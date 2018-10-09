@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#008282">
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="131dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="167dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/text_mode"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="@string/mode"
+        android:textColor="@android:color/background_light"
+        android:textSize="30dp" />
+
+    <Spinner
+        android:id="@+id/spinner_mode"
+        android:layout_width="152dp"
+        android:layout_height="37dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/text_mode"
+        android:layout_marginEnd="15dp"
+        android:background="@android:color/background_light"
+        android:textColor="#FFFFFF"
+        android:textSize="10dp" />
+
+    <Spinner
+        android:id="@+id/spinner_user"
+        android:layout_width="122dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="142dp"
+        android:background="@android:color/background_light"
+        android:textColor="#FFFFFF">
+        android:textSize="20dp"</Spinner>
+
+    <Button
+        android:id="@+id/button_modesel"
+        android:layout_width="131dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="167dp"
+        android:onClick="staypoints_disp"
+        android:text="Continue" />
+
+    <TextView
+        android:id="@+id/train"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/text_mode"
+        android:layout_marginTop="232dp"
+        android:text="@string/train"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/text_mode"
+        android:layout_centerVertical="true"
+        android:text="@string/test"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/test_from"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/train_from"
+        android:layout_alignTop="@+id/test"
+        android:text="@string/from"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/test_to"
+        android:layout_width="119dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/train_to"
+        android:layout_alignTop="@+id/test"
+        android:text="@string/to"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/train_from"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/text_mode"
+        android:layout_alignTop="@+id/train"
+        android:text="@string/from"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/train_to"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/train"
+        android:layout_marginEnd="34dp"
+        android:text="@string/to"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp" />
+</RelativeLayout>

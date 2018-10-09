@@ -1,4 +1,4 @@
-location_predictions_wperformance:
+location_predictions_performance:
 
 This program 
 
@@ -8,12 +8,12 @@ input:
 3. Test month
 
 output:
-1. Create prediction file
-2. Create text file with prediction performance parameters(total predictions, correct predictions, incorrect predictions and so on)
+1. Create prediction file in test month
+2. Create text file with prediction performance parameters(total predictions, correct predictions, incorrect predictions, cosine similarity)
 
 Steps:  
 
-(Note: the data for selected user and months should already be present. If not, use program markov_chains to generate data before running this program.)
+(Note: the data for selected user and months should already be present. If not, use program create_markov_chains to generate data before running this program.)
 
 1. Change user in variable "user"
 2. Change train month in variable "train_month"

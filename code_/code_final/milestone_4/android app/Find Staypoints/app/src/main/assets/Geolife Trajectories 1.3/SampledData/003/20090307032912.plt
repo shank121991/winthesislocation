@@ -1,0 +1,2 @@
+	Latitude	Longitude	0	Altitude	NumDays	Date	Time
+0	40.0039425	116.3203996	0.0	491.9	39879.14553819444	2009-03-07	03:29:00

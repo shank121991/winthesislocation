@@ -1,0 +1,26 @@
+prediction_paths:
+
+This program find predicted path based on inputs.
+
+For a particular user and month in an online manner.
+
+inputs:
+1. User
+2. Source path for markov chain model
+3. Confidence threshold
+4. Starting hour
+6. Starting location as state
+
+Output:
+1. Predicted paths
+
+Steps:
+1. Change user in variable "user"
+2. Change month in variable "month"
+3. Change the confidence threshold in variable "confidence_thrshld" (max 1.0)
+4. Change markov model source file path in variable "src_path"
+5. Change starting hour in variable "hour"
+
+Run the program!
+
+6. Select the state from dropdown list as starting state and see the result

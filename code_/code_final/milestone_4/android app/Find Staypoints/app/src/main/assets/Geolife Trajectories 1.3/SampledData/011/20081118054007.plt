@@ -1,0 +1,2 @@
+	Latitude	Longitude	0	Altitude	NumDays	Date	Time
+0	39.98497996	116.35359328	0	187	39770.236240740735	2008-11-18	05:40:00

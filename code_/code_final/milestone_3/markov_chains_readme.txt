@@ -1,4 +1,4 @@
-markov_chains:
+create_markov_chains:
 
 This program:
 
@@ -15,7 +15,7 @@ inputs:
 1. User
 2. Month
 3. Source file path for Geolife data
-4. Destination forlder path
+4. Destination folder path for results
 
 Output:
 1. Statypoints file
@@ -23,11 +23,10 @@ Output:
 3. Transition matrices for each day and a final transition matrix
 4. Markov chain for each hour and final markov chain 
 
-
 Steps:
 1. Change user in variable "user"
 2. Change the month in variable "month"
-3. Change Geolife source file path in variable "file_src"
+3. Change Geolife source file path in variable "geolife_data_source_path"
 4. Change destination files path in variable "base_path"
 
 Run the program!
