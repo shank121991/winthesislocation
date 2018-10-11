@@ -89,20 +89,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hour" />
 
-    <Spinner
-        android:id="@+id/spinner_confs"
-        android:layout_width="182dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.408"
-        app:layout_constraintStart_toEndOf="@+id/confidence"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_hour" />
-
     <Button
         android:id="@+id/button_paths"
         android:layout_width="wrap_content"
@@ -111,10 +97,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:text="@string/run"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_confs" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar_conf" />
 
     <TextView
         android:id="@+id/paths"
@@ -125,19 +112,18 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/paths"
         app:layout_constraintBottom_toTopOf="@+id/pathlist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_paths"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ListView
         android:id="@+id/pathlist"
         android:layout_width="391dp"
-        android:layout_height="297dp"
+        android:layout_height="302dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -146,5 +132,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBar_conf"
+        android:layout_width="228dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:max="100"
+        android:progress="10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/confidence"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_hour" />
 
 </android.support.constraint.ConstraintLayout>

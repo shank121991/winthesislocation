@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class predictions extends AppCompatActivity {
     Spinner conf_spinner;
     String selected_hour;
     String selected_state;
-    String selected_conf;
+    int selected_conf;
     ArrayAdapter<CharSequence> adapter_hour;
     ArrayAdapter<CharSequence> adapter_confs;
     ArrayAdapter<String> adapter_state;
@@ -84,10 +85,18 @@ public class predictions extends AppCompatActivity {
         paths_run.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Starts an intent of the log in activity
+
+                //get new confidence value
+                SeekBar simpleSeekBar=(SeekBar) findViewById(R.id.seekBar_conf); // initiate the Seekbar
+                selected_conf = simpleSeekBar.getProgress();
+
+                //clear path list and paths
                 path_list.clear();
                 paths.clear();
+
+                // calculate new paths
                 calc_paths();
+
                 //display the address as a list
                 display_list();
             }
@@ -105,7 +114,9 @@ public class predictions extends AppCompatActivity {
     }
     public void calc_paths() {
         PriorityQueue<qelement> q_path = new PriorityQueue<>();
-        double conf = Double.parseDouble(selected_conf.replaceAll("%", "")) / 100;
+
+        //double conf = Double.parseDouble(selected_conf.replaceAll("%", "")) / 100;
+        double conf = selected_conf/(double)100;
 
         //based on hour select the markov chain matrix
         int hour = Integer.parseInt(selected_hour);
@@ -123,19 +134,19 @@ public class predictions extends AppCompatActivity {
             q_path.add(new qelement(sel_mc[0][i], sel_mc[row_id][i], nxt_hour, stateid, 1.0, hour));
         }
 
-        Boolean allow_last = true;
+        //Boolean allow_last = true;
         while (!q_path.isEmpty()) {
             qelement next_path = q_path.remove();
-            if ((next_path.getProb() > conf) ||
-                    (allow_last == true)) {
+            if ((next_path.getProb() > conf)) {
+                    //|| (allow_last == true)) {
 
-                if (next_path.getProb() <= conf)
-                    allow_last = false;
+                //if (next_path.getProb() <= conf)
+                //    allow_last = false;
                 int read_hour = next_path.hour;
                 paths.add(next_path);
 
                 if (read_hour == 23)
-                    break;
+                    continue;
                 sel_mc = select_mc(read_hour);
                 row_id = look_rowid(next_path.stateid);
 
@@ -148,6 +159,9 @@ public class predictions extends AppCompatActivity {
         }
 
         //assign path ids
+        if (paths.size() == 0)
+            return;
+
         paths.get(0).setPath_id(1);
 
         for(int i = 1; i < paths.size(); i++){
@@ -206,10 +220,11 @@ public class predictions extends AppCompatActivity {
             pathid_prob = "<b>PATH: </b>";
             for (int i = 0; i < paths.size(); i++) {
                 if (paths.get(i).getPath_id() == k) {
-                    pathid_prob = pathid_prob + "<font color=\"blue\">" + (Double.toString(paths.get(i).getStateid()) +
-                            "</font>" + "<sub>" + "(" +
+                    pathid_prob = pathid_prob + "<font color=\"Teal\">" + (Double.toString(paths.get(i).getStateid()) + "</font>" +
+                            //"</font>" + "<sup> <font color=\"Silver\">" + Integer.toString(paths.get(i).getHour()) + "</font> </sup>" +
+                            "<font color=\"Olive\">" + "<sub>" + "(" +
                             String.format("%.2f", paths.get(i).getProb()) +
-                            ")" + "</sub>" + "<font color=\"green\">" +"->" + "</font>");
+                            ")" + "</sub>" + "</font>" +  "<font color=\"Black\">" +"->" + "</font>");
                 }
             }
             path_list.add(pathid_prob);
@@ -401,7 +416,7 @@ public class predictions extends AppCompatActivity {
     }
 
     private void conf_selection() {
-        conf_spinner = (Spinner) findViewById(R.id.spinner_confs);
+        /*conf_spinner = (Spinner) findViewById(R.id.spinner_confs);
         adapter_confs = ArrayAdapter.createFromResource(this, R.array.confs, android.R.layout.simple_spinner_item);
         adapter_confs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         conf_spinner.setAdapter(adapter_confs);
@@ -416,7 +431,11 @@ public class predictions extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });
+        });*/
+        SeekBar simpleSeekBar=(SeekBar) findViewById(R.id.seekBar_conf); // initiate the Seekbar
+        simpleSeekBar.setMax(100);
+        simpleSeekBar.setProgress(10);
+        selected_conf = simpleSeekBar.getProgress();
     }
 
     private void state_selection() {

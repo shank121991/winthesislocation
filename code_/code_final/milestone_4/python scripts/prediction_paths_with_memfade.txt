@@ -1,0 +1,8 @@
+prediction_paths_with_memfade
+------------------------------
+
+This is an extention of prediction_paths script with memory fade function.
+
+We performed a survey to see how people inference location movement data. 
+We apply a forgetting factor based on our survey.
+This makes the program forget (loss of weak probabilities and strenghtening the strong probablities) like human brain.
