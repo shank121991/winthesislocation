@@ -215,6 +215,9 @@ public class predictions extends AppCompatActivity {
         //sort paths based on keys: pathid, hour, probability
         sort_paths();
 
+        //add trails to all the paths
+        add_trails();
+
         //form path list for display
         for(int k = 1; k <= tot_paths; k++) {
             pathid_prob = "<b>PATH: </b>";
@@ -229,6 +232,59 @@ public class predictions extends AppCompatActivity {
             }
             path_list.add(pathid_prob);
         }
+    }
+
+    private void add_trails() {
+
+        // if paths is empty no trains can be added
+        if (paths.size() == 0)
+            return;
+
+        ArrayList<qelement> temp_paths = new ArrayList<>();
+        int prev_path = paths.get(0).getPath_id();
+        double stateid;
+        int hour;
+        double prob;
+
+        for (int i = 1; i < paths.size(); i++){
+            if (paths.get(i).getPath_id() != prev_path ||
+                    i == paths.size()-1 ){
+                if (paths.get(i).getPath_id() != prev_path){
+                    stateid = paths.get(i-1).getStateid();
+                    hour = paths.get(i-1).getHour();
+                    prob = paths.get(i-1).getProb();
+                }
+                else{
+                    stateid = paths.get(i).getStateid();
+                    hour = paths.get(i).getHour();
+                    prob = paths.get(i).getProb();
+                }
+
+                int next_hour = hour + 1;
+
+                if (hour != 23) {
+                    PriorityQueue<qelement> q_path = new PriorityQueue<>();
+                    double[][] sel_mc;
+                    sel_mc = select_mc(hour);
+                    int row_id;
+                    row_id = look_rowid(stateid);
+
+                    for (int j = 1; j < sel_mc.length; j++) {
+                        q_path.add(new qelement(sel_mc[0][j], sel_mc[row_id][j] * prob, next_hour, stateid, prob, hour));
+                    }
+
+                    if (!q_path.isEmpty()) {
+                        qelement next_path = q_path.remove();
+                        next_path.setPath_id(prev_path);
+                        temp_paths.add(next_path);
+                    }
+                }
+                prev_path = paths.get(i).getPath_id();
+            }
+        }
+        for (int i = 0; i < temp_paths.size(); i++)
+            paths.add(temp_paths.get(i));
+        sort_paths();
     }
 
     private void sort_paths() {
