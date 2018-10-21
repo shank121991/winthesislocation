@@ -220,14 +220,19 @@ public class predictions extends AppCompatActivity {
 
         //form path list for display
         for(int k = 1; k <= tot_paths; k++) {
-            pathid_prob = "<b>PATH: </b>";
+            pathid_prob = "<h1><b>PATH:</b><br/></h1> ";
             for (int i = 0; i < paths.size(); i++) {
                 if (paths.get(i).getPath_id() == k) {
-                    pathid_prob = pathid_prob + "<font color=\"Teal\">" + (Double.toString(paths.get(i).getStateid()) + "</font>" +
+                    int stateid_int = (int)paths.get(i).getStateid();
+                    int color_rgb = (int)((1 - paths.get(i).getProb()) * 255);
+                    String hex = String.format("#%02x%02x%02x", color_rgb, color_rgb, color_rgb);
+                    pathid_prob = pathid_prob + " <b><font color=" +
+                            hex  + "> " + (Integer.toString(stateid_int) + " </font></b>" +
                             //"</font>" + "<sup> <font color=\"Silver\">" + Integer.toString(paths.get(i).getHour()) + "</font> </sup>" +
-                            "<font color=\"Olive\">" + "<sub>" + "(" +
-                            String.format("%.2f", paths.get(i).getProb()) +
-                            ")" + "</sub>" + "</font>" +  "<font color=\"Black\">" +"->" + "</font>");
+                            //"<font color=\"Olive\">" + "<sub>" + "(" +
+                            //String.format("%.2f", paths.get(i).getProb()) +
+                            //")" + "</sub>" + "</font>" +
+                            "<font color=\"Black\">" +"->" + "</font>");
                 }
             }
             path_list.add(pathid_prob);
