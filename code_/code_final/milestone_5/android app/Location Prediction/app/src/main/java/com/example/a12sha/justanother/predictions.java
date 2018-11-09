@@ -26,12 +26,12 @@ public class predictions extends AppCompatActivity {
     private Button paths_run;
     Spinner state_spinner;
     Spinner hour_spinner;
-    Spinner conf_spinner;
+    //Spinner conf_spinner; // use this if confidence threshold is to be a dropdown list
     String selected_hour;
     String selected_state;
     int selected_conf;
     ArrayAdapter<CharSequence> adapter_hour;
-    ArrayAdapter<CharSequence> adapter_confs;
+    //ArrayAdapter<CharSequence> adapter_confs; // use this if confidence threshold is to be a dropdown list
     ArrayAdapter<String> adapter_state;
     public ArrayList<states> state_list = new ArrayList<>();
     public ArrayList<String> states_ids = new ArrayList<>();
@@ -87,7 +87,7 @@ public class predictions extends AppCompatActivity {
             public void onClick(View v) {
 
                 //get new confidence value
-                SeekBar simpleSeekBar=(SeekBar) findViewById(R.id.seekBar_conf); // initiate the Seekbar
+                SeekBar simpleSeekBar=(SeekBar) findViewById(R.id.seekBar_conf);
                 selected_conf = simpleSeekBar.getProgress();
 
                 //clear path list and paths
@@ -219,22 +219,44 @@ public class predictions extends AppCompatActivity {
         add_trails();
 
         //form path list for display
+        //suggestion 1 - Very detailed
+        // stateid(confidence)->stateid(confidence)
+        /*
         for(int k = 1; k <= tot_paths; k++) {
-            pathid_prob = "<h1><b>PATH:</b><br/></h1> ";
+            pathid_prob = "<b>"+ Integer.toString(k) + " </b><br/>";
+            for (int i = 0; i < paths.size(); i++) {
+                if (paths.get(i).getPath_id() == k) {
+                    pathid_prob = pathid_prob + "<font color=#f20d0d><b>" + Double.toString(paths.get(i).getStateid()) + "</b></font>" +
+                            "<font color=#996666>" + "<sub>" +
+                            String.format("%.2f", paths.get(i).getProb()) +
+                            "</sub>" + "</font>" +  "<font color=\"Black\">" +">" + "</font>" +
+                            "<sup> <font color=\"Silver\">" + Integer.toString(paths.get(i).getHour()) + "</font> </sup>";
+                }
+            }
+            path_list.add(pathid_prob);
+        }*/
+
+        //suggestion 2 - Not very detailed, only overview
+        // stateid>stateid
+
+        for(int k = 1; k <= tot_paths; k++) {
+            pathid_prob = "<h1><b>"+ Integer.toString(k)+ "</b> <br/></h1>";
+            String start_hour = Integer.toString(paths.get(0).getHour());
+            String end_hour = Integer.toString(paths.get(paths.size()-1).getHour());
+            pathid_prob = pathid_prob + "<b><font color=#CD5C5C>(" + start_hour + ")</font></b>" ;
+
             for (int i = 0; i < paths.size(); i++) {
                 if (paths.get(i).getPath_id() == k) {
                     int stateid_int = (int)paths.get(i).getStateid();
                     int color_rgb = (int)((1 - paths.get(i).getProb()) * 255);
                     String hex = String.format("#%02x%02x%02x", color_rgb, color_rgb, color_rgb);
-                    pathid_prob = pathid_prob + " <b><font color=" +
-                            hex  + "> " + (Integer.toString(stateid_int) + " </font></b>" +
-                            //"</font>" + "<sup> <font color=\"Silver\">" + Integer.toString(paths.get(i).getHour()) + "</font> </sup>" +
-                            //"<font color=\"Olive\">" + "<sub>" + "(" +
-                            //String.format("%.2f", paths.get(i).getProb()) +
-                            //")" + "</sub>" + "</font>" +
-                            "<font color=\"Black\">" +"->" + "</font>");
+                    pathid_prob = pathid_prob + " <font color=" +
+                            hex  + "><b>" + (Integer.toString(stateid_int) + " </b>" +
+                            ">" + "</font>");
+                    end_hour = Integer.toString(paths.get(i).getHour());
                 }
             }
+            pathid_prob = pathid_prob + "<b><font color=#CD5C5C>(" + end_hour + ")</font></b>" ;
             path_list.add(pathid_prob);
         }
     }
@@ -477,6 +499,7 @@ public class predictions extends AppCompatActivity {
     }
 
     private void conf_selection() {
+        // following code is for a dropdown list for confidence selection
         /*conf_spinner = (Spinner) findViewById(R.id.spinner_confs);
         adapter_confs = ArrayAdapter.createFromResource(this, R.array.confs, android.R.layout.simple_spinner_item);
         adapter_confs.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -493,7 +516,9 @@ public class predictions extends AppCompatActivity {
 
             }
         });*/
-        SeekBar simpleSeekBar=(SeekBar) findViewById(R.id.seekBar_conf); // initiate the Seekbar
+
+        // following code is for a slider for confidence selection
+        SeekBar simpleSeekBar=(SeekBar) findViewById(R.id.seekBar_conf);
         simpleSeekBar.setMax(100);
         simpleSeekBar.setProgress(10);
         selected_conf = simpleSeekBar.getProgress();

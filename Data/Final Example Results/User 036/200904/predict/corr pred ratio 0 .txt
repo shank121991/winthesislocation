@@ -1,0 +1,12 @@
+Total Predictions: 0
+Correct Predictions: 0
+Incorrect Predictions: 0
+Accuracy%: 0
+True Positives: 0
+False Positives: 0
+False Negatives: 0
+True Negatives: 0
+True positive rate(Recall)%: 0
+Accuracy Positives%: 0
+Positive predictive value(Precision)%: 0
+False discovery rate%: 0
