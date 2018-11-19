@@ -68,6 +68,7 @@ The Algorithm has several steps:
 
 \section{Algorithms}
 
+\iffalse
 \begin{algorithm}
 \caption{Read new location and process}
 \label{pseudoPSO}
@@ -93,6 +94,7 @@ The Algorithm has several steps:
 \EndFor
 \end{algorithmic}
 \end{algorithm}
+\fi
 
 \begin{algorithm}
 \caption{extractStayPoints() : Calculate stay-points}
@@ -104,18 +106,11 @@ The Algorithm has several steps:
 \For{each  \textit{lst\_hr\_pts[x, y, d]\textsubscript{i}} in \textit{lst\_hr\_pts[x, y, d]}}
 \If{$d\textsubscript{i} - d\textsubscript{i+1} > th\_tck$}
 	\State$ sp \gets lst\_hr\_pts\textsubscript{i},  lst\_hr\_pts\textsubscript{i+1}$
-	\State adjustStartEndStaypoint()
-	\State continue
-\EndIf
-
-\If{$distanceBtw( lst\_hr\_pts\textsubscript{i}, cluster) <=   th\_d$}
+\ElsIf{$distanceBtw( lst\_hr\_pts\textsubscript{i}, cluster) <=   th\_d$}
 	\State $cluster \gets lst\_hr\_pts\textsubscript{i}$ 
-	\State calculate New Cluster Mean
-\Else
-	\If{$(cluster != empty$) And $duration(cluster) >= th\_t$}
-    	\State $sp \gets cluster$
-    	\State adjustStartEndStaypoint()
-	\EndIf
+	\State Update Cluster Mean
+\ElsIf{$(cluster != empty$) And $duration(cluster) >= th\_t$}
+    \State $sp \gets cluster$
 \EndIf
 
 \EndFor
@@ -129,12 +124,16 @@ The Algorithm has several steps:
 \hspace*{\algorithmicindent} \textbf{Output:} \text{Stay-points with adjusted start and end points} \textit{sp}
 \begin{algorithmic}[1]
 \For{each \textit{sp\textsubscript{i}} in \textit{sp}}
-	\State $distance \gets distanceBtw(sp\textsubscript{i}, sp\textsubscript{i+1})$
-	\State $time \gets timeDifference(sp\textsubscript{i}, sp\textsubscript{i+1})$
-	\State $avgSpeed \gets distance/time$
-	\State $delta_t \gets min(distance$, $thresholdDistance)/AvgSpeed$
-	\State Update endTime \textit{d\textsubscript{e}+delta\_t/2}  for \textit{sp\textsubscript{i}}
-	\State Update startTime \textit{d\textsubscript{s}-delta\_t/2} for \textit{sp\textsubscript{i+1}}
+	\State $d \gets distanceBtw(sp\textsubscript{i}, sp\textsubscript{i+1})$
+	\State $t \gets timeDiff(sp\textsubscript{i}, sp\textsubscript{i+1})$
+	\State $s \gets d/t$
+	\If {$s != 0$}
+		\State $delta\_t \gets min(d$, $th\_d)/s$
+	\Else
+		\State $delta\_t \gets t/2$
+	\EndIf
+	\State Update end\_time \textit{d\textsubscript{e}+delta\_t/2}  for \textit{sp\textsubscript{i}}
+	\State Update start\_time \textit{d\textsubscript{s}-delta\_t/2} for \textit{sp\textsubscript{i+1}}
 \EndFor
 \end{algorithmic}
 \end{algorithm}
@@ -143,27 +142,32 @@ The Algorithm has several steps:
 \begin{algorithm}
 \caption{formStates() : Form states from stay-points}
 \label{pseudoPSO}
-\hspace*{\algorithmicindent} \textbf{Input:} \text{Stay-points} \textit{sp} \\
+\hspace*{\algorithmicindent} \textbf{Input:} \text{Stay-point} \textit{sp\textsubscript{n+1}} \text{, States} \textit{st} \\
 \hspace*{\algorithmicindent} \textbf{Output:} \text{States} \textit{st}
 
 \begin{algorithmic}[1]
 
-\For{each \textit{sp\textsubscript{i}} in \textit{sp}}
-\For{each \textit{sp\textsubscript{j}} in \textit{sp}}
-\If{$distanceBtw(sp\textsubscript{i}, sp\textsubscript{j}) <= th\_d$}
-	\State Calculate new mean latitude and longitude for \textit{st} with \textit{sp\textsubscript{i}}
+\For{each \textit{st\textsubscript{j}} in \textit{st}}
+\State $is\_sp\textsubscript{n+1}\_added \gets False$
+\If{$distanceBtw(sp\textsubscript{n+1}, st\textsubscript{j}) <= th\_d$}
+	\State Add sp\textsubscript{n+1} to st
 	\State $newMean \gets mean(\textit{st})$
-	\If {$distanceBtw(st, newMean) <= th\_d$}
-		\State Combine \textit{sp\textsubscript{i}} and \textit{sp\textsubscript{j}} in \textit{st}
+	\If {$distanceBtw(All$ $sp's$ $of$ $st\textsubscript{j}, newMean) <= th\_d$}
+		\State Add \textit{sp\textsubscript{n+1}} to \textit{st\textsubscript{j}}
+		\State $is\_sp\textsubscript{n+1}\_added \gets True$ 
+		\State Break
 	\Else
-		\State Form new \textit{st} from \textit{sp\textsubscript{j}}
+		\State Remove sp\textsubscript{n+1} from st
 	\EndIf
 \EndIf
 \EndFor
-\EndFor
+\If{$is\_sp\textsubscript{n+1}\_added=False$}
+\State Add new state in st
+\EndIf
 \end{algorithmic}
 \end{algorithm}
 
+\iffalse
 \begin{algorithm}
 \caption{calculateStateWeights() : Calculate Hourly Weights of States}
 \label{pseudoPSO}
@@ -176,21 +180,26 @@ The Algorithm has several steps:
 \EndFor
 \end{algorithmic}
 \end{algorithm}
-
+\fi
 
 \begin{algorithm}
-\caption{updateMarkovModel() : Recalculate the Markov Model(This algorithm creates the transition probabilities from state i to i+1 from hour j to j+1)}
+\caption{markovModel() : Create the Markov Model with transition probabilities)}
 \label{pseudoPSO}
 \hspace*{\algorithmicindent} \textbf{Input:} \text{State Weights} \textit{w} \\
 \hspace*{\algorithmicindent} \textbf{Output:} \text{Markov Chain Model} \textit{mc}
 \begin{algorithmic}[1]
-\For{each $h-hour$ from $0to24$ }
-	\For{each \textit{w\textsubscript{i}} in \textit{w}}
-		\For{each \textit{w\textsubscript{j}} in \textit{w}}
-			\State $mc \gets w\textsubscript{i}[h] * w\textsubscript{j}[h+1]$
-		\EndFor
-	\EndFor
+\For{each $h-hour$ from $0to23$ }
+	\If {$h!=23$}
+		\State $trn\_mat\textsubscript{h+1} \gets w\textsuperscript{h\textsuperscript{\text{[T]}}} * w\textsuperscript{h+1}$
+		\State $mc\textsubscript{h+1} \gets eachCell(trn\_mat\textsubscript{h+1})/rowSum(trn\_mat\textsubscript{h+1})$
+	\Else
+		\State $trn\_mat\textsubscript{0} \gets w\textsuperscript{23\textsuperscript{\text{[T]}}} * w\textsuperscript{0}$
+		\State $mc\textsubscript{0} \gets eachCell(trn\_mat\textsubscript{0})/rowSum(trn\_mat\textsubscript{0})$
+	\EndIf
 \EndFor
+
+
+
 \end{algorithmic}
 \end{algorithm}
 

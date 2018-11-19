@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6730 64-bit) (preloaded format=pdflatex 2018.8.12)  21 OCT 2018 17:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6730 64-bit) (preloaded format=pdflatex 2018.8.12)  16 NOV 2018 18:53
 entering extended mode
 **./algorithm.tex
 (algorithm.tex
@@ -204,12 +204,6 @@ LaTeX Warning: Label `pseudoPSO' multiply defined.
 
 LaTeX Warning: Label `pseudoPSO' multiply defined.
 
-
-LaTeX Warning: Label `pseudoPSO' multiply defined.
-
-
-LaTeX Warning: Label `pseudoPSO' multiply defined.
-
 )
 \openout1 = `algorithm.aux'.
 
@@ -370,36 +364,38 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 {C:/Users/12sha/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./Flowchart
 _Algo.png>] [2 <./hourlymat.png> <./markovchain.png> <./stateweights.png>]
-[3 <./threestepsover.png>] [4] [5] [6] (algorithm.aux)
+[3 <./threestepsover.png>] [4] [5] (algorithm.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3102 strings out of 492973
- 43438 string characters out of 3126692
- 118734 words of memory out of 3000000
- 6913 multiletter control sequences out of 15000+200000
+ 3098 strings out of 492973
+ 43382 string characters out of 3126692
+ 115734 words of memory out of 3000000
+ 6909 multiletter control sequences out of 15000+200000
  12240 words of font info for 47 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,6n,27p,734b,311s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,9n,27p,734b,318s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/12sha/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
 /cm/cmbx10.pfb><C:/Users/12sha/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmbx12.pfb><C:/Users/12sha/AppData/Local/Programs/MiKTeX 2.9/f
 onts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/12sha/AppData/Local/Programs
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/12sha/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/12sh
-a/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/12sha/AppData/Lo
+cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/12sh
+a/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C
 :/Users/12sha/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmr17.pfb><C:/Users/12sha/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmr7.pfb><C:/Users/12sha/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmr8.pfb><C:/Users/12sha/AppData/Local/Programs/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/12sha/AppData/Local/Prog
-rams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/12sha/AppDa
-ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti7.pfb>
-Output written on algorithm.pdf (6 pages, 273949 bytes).
+cmr5.pfb><C:/Users/12sha/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmr7.pfb><C:/Users/12sha/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmr8.pfb><C:/Users/12sha/AppData/Local/Programs/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/12sha/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/12sha/AppData
+/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/
+12sha/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti7.pf
+b>
+Output written on algorithm.pdf (5 pages, 278650 bytes).
 PDF statistics:
- 79 PDF objects out of 1000 (max. 8388607)
+ 80 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
