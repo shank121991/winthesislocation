@@ -8,6 +8,7 @@ import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TimingLogger;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -30,10 +31,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-public class staypoints_list extends AppCompatActivity {
+public class createMarkovChain extends AppCompatActivity {
 
     //variables
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss");
     private String mode_sel;
     private String user_sel;
@@ -73,6 +73,9 @@ public class staypoints_list extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staypoints_list);
+
+        // Time loggers to track the time of execution and creation of markov chain
+        long tStart = System.currentTimeMillis();
 
         //fetch data from previous screen (mode, user, dates)
         fetch_prev_act_data();
@@ -115,7 +118,12 @@ public class staypoints_list extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, user_state_addr);
         staypointslist.setAdapter(adapter);
 
-
+        // end of process creating markov chain, track time
+        long tEnd = System.currentTimeMillis();
+        long tDelta = tEnd - tStart;
+        double elapsedSeconds = tDelta / 1000.0;
+        Log.i("Total States:", Integer.toString(unique_stateids));
+        Log.i("Markov Chains Time:", Double.toString(elapsedSeconds));
     }
 
     private void fetch_prev_act_data() {

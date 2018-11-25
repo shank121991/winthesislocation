@@ -16,9 +16,6 @@ import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -148,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 view.setVisibility(view.GONE);
             }
 
-            Intent intent = new Intent(this, staypoints_list.class);
+            Intent intent = new Intent(this, createMarkovChain.class);
             intent.putExtra("mode_selected", selected_mode);
             intent.putExtra("user_selected", selected_user);
             intent.putExtra("train_from_date_selected", train_month);

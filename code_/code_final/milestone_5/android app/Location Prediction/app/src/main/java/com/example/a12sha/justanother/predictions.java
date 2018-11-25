@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class predictions extends AppCompatActivity {
+
     private Button paths_run;
     Spinner state_spinner;
     Spinner hour_spinner;
