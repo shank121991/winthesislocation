@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Location Prediction</string>
+    <string name="app_name">Privacy-Risk-Estimator</string>
     <string name="mode">Select Mode</string>
     <string-array name="modes">
         <item>GPS</item>

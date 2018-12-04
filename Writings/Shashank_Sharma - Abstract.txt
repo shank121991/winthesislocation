@@ -1,0 +1,37 @@
+Design and Development of Software Agents for Location Privacy-risk estimation
+------------------------------------------------------------------------------
+
+Abstract
+--------
+
+The usage of mobile devices has become ubiquitous in today’s world. More people are
+adopting smartphones to be able to connect with family and friends, easily perform
+day-to-day tasks, discover new facets, etc. The smartphones are location-enabled and
+because of this, the rise of Location-Based Applications (LBAs) in the last decade has
+been phenomenal. Different LBAs use location information for advertising, recommendations,
+finding new friends, suggesting a new point of interests, etc., based on user
+trends. However, sharing location data can reveal personality traits, illnesses, political
+inclinations and religious views. When the location data is collected for a certain period,
+whereabouts can be easily guessed. For instance, once the location information
+is collected for a few days, the arrival and departure time from “work” location can be
+easily estimated. Thus, the characteristics revealed just by location details are narrowly
+perceived by most users and imposes a privacy risk.
+
+To address this privacy risk, a software agent is developed which helps to estimate and
+visualize this threat. It can push notifications and aware the user about the privacy risk
+before he/she decides to share the location with LBAs. In this thesis, we present an
+algorithm that predicts the user’s future movements with confidence percentages. This
+algorithm processes the raw location coordinates and extracts the meaningful locations.
+Based on the meaningful locations, a prediction model is formed. This model is used
+to predict future visits based on the user’s current location. The algorithm is evaluated
+using real-life data from Microsoft Geolife dataset. To inform the user about the privacy
+threat, a visualization of future visits with confidence percentages is implemented.
+Finally, a prototype on an Android device is developed to help user estimate the privacy
+risk before sharing location information on LBAs.
+
+
+
+Shashank Sharma
+INFOTECH Student
+Master Thesis 2018 
+Under supervision of M.Sc. Zohaib Riaz
